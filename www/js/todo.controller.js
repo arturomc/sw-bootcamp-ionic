@@ -67,7 +67,6 @@
 
 		// Called when the form is submitted
 		function createTask(task) {
-			debugger;
 			if (!vmTodo.activeProject || !task) {
 				return;
 			}
