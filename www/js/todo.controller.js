@@ -1,29 +1,56 @@
 (function() {
-    'use strict';
+	'use strict';
 
-    angular
-        .module('todo')
-        .controller('TodoController', TodoController);
+	angular
+		.module('todo')
+		.controller('TodoController', TodoController);
 
-    TodoController.$inject = [];
+	TodoController.$inject = ['$ionicModal', '$scope'];
 
-    /* @ngInject */
-    function TodoController() {
-        var vmTodo = this;
+	/* @ngInject */
+	function TodoController($ionicModal, $scope) {
+		var vmTodo = this;
 
-        activate();
+		vmTodo.newTask = newTask;
+		vmTodo.closeNewTask = closeNewTask;
+		vmTodo.createTask = createTask;
 
-        vmTodo.tasks = [
-        	{title: 'Collect coins'},
-        	{title: 'Eat mushrooms'},
-        	{title: 'Get high enough to grab the flag'},
-        	{title: 'Find the Princess'}
-        ];
-        ////////////////
+		vmTodo.tasks = [];
 
-        function activate() {
-        }
+		activate();
 
+		////////////////
 
-    }
+		function activate() {
+
+			// Create and load the Modal
+			$ionicModal.fromTemplateUrl('/templates/new-task.html', function(modal) {
+				vmTodo.taskModal = modal;
+			}, {
+				scope: $scope,
+				animation: 'slide-in-up'
+			});
+
+		}
+
+		// Close the new task modal
+		function closeNewTask() {
+			vmTodo.taskModal.hide();
+		};
+
+		// Called when the form is submitted
+		function createTask(task) {
+			vmTodo.tasks.push({
+				title: task.title
+			});
+			vmTodo.taskModal.hide();
+			task.title = "";
+		};
+
+		// Open our new task modal
+		function newTask() {
+			vmTodo.taskModal.show();
+		}
+
+	}
 })();
