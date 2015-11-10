@@ -34,11 +34,11 @@
 		function activate() {
 
 			// Create and load the Modal
-			$ionicModal.fromTemplateUrl('/templates/new-task.html', function(modal) {
-				$scope.taskModal = modal;
-			}, {
+			$ionicModal.fromTemplateUrl('new-task.html', {
 				scope: $scope,
 				animation: 'slide-in-up'
+			}).then( function(modal) {
+				$scope.taskModal = modal;
 			});
 
 			// Try to create the first project, make sure to defer
@@ -67,7 +67,7 @@
 
 		// Called when the form is submitted
 		function createTask(task) {
-
+			debugger;
 			if (!vmTodo.activeProject || !task) {
 				return;
 			}
@@ -79,7 +79,7 @@
 			$scope.taskModal.hide();
 
 			// Inefficient, but save all the projects
-			Projects.save($scope.projects);
+			Projects.save(vmTodo.projects);
 
 			task.title = "";
 		};
