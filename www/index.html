@@ -10,6 +10,7 @@
     <!-- ngAnimate and ngSanitize are included, but other modules
       should be loaded from lib/ionic/js/angular-->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+<script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script>
   
     <script src="js/app.js"></script>
     <script src="js/todo.controller.js"></script>
@@ -18,7 +19,8 @@
     <!-- Should be the last script -->
     <!-- Needed for Cordova/PhoneGap (will be a 404 during development) -->
     <!-- automatically included when running or emulating your app. -->
-    <script src="cordova.js"></script>
+    <!-- Cordova is bootstrapped by ionic-platform-web-client, uncomment this if you remove ionic-platform-web-client... -->
+<!-- <script src="cordova.js"></script> -->
   </head>
   <body ng-app="todo" ng-controller="TodoController as vmTodo">
     
